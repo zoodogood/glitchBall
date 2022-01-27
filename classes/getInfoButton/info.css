@@ -1,0 +1,19 @@
+.info-element
+{
+  z-index: 2;
+  transition: all 500ms;
+  
+  background: rgba(0, 0, 0, 0);
+  letter-spacing: 1.5px;
+  white-space: pre-line;
+  line-height: 150%;
+  color: white;
+}
+
+.info-open
+{
+  border: 1px solid white;
+  padding: 20px;
+  max-width: 50vw;
+  background: rgba(0, 0, 0, 1);
+}

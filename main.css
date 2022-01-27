@@ -1,0 +1,21 @@
+.restarted
+{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("resources/repeat.png");
+  animation: scaleBackground 200ms ease-in-out 0s 1 normal forwards;
+}
+
+
+@keyframes scaleBackground
+{
+    0%
+    {
+      background-size: 0 0;
+    }
+
+    100%
+    {
+      background-size: 40% 40%;
+    }
+}
