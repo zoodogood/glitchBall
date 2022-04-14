@@ -2,7 +2,7 @@
 {
   z-index: 2;
   transition: all 500ms;
-  
+
   background: rgba(0, 0, 0, 0);
   letter-spacing: 1.5px;
   white-space: pre-line;
@@ -16,4 +16,12 @@
   padding: 20px;
   max-width: 50vw;
   background: rgba(0, 0, 0, 1);
+}
+
+
+@media (max-width: 680px){
+  .info-element
+  {
+    max-width: 90vw;
+  }
 }

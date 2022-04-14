@@ -8,7 +8,7 @@ new Game("canvas")
     game.titleElement.innerHTML = `<span class = "increased-font">${ hasWin ? `<b>Счёт: ${ game.getScore() }</b><br>Время вышло.` : `<b>Счёт: ${ game.getScore() }</b><br>Игра окончена. Я без понятия почему Вы решили проиграть . . .`}</span>`;
     game.canvas.classList.add("restarted");
 
-    await new Promise(res => game.canvas.addEventListener("mouseup", res, { once: true }));
+    await new Promise(res => game.canvas.addEventListener("pointerup", res, { once: true }));
     game.canvas.classList.remove("restarted");
     game.titleElement.textContent = "Пуск!";
     game.init();
@@ -21,7 +21,7 @@ new HidingInfo("#getInfo",
   2. За 15.2с Вам нужно заработать как можно больше очков, не проиграв
   3. Очки можно получить заполняя область среднего круга (того, который движется)
   Для заполнения <span>зажмите левую кнопку мыши</span> внутри него.
-  4. Если Вы заполнили область за переделами этого круга — проиграли.
+  4. Если Вы заполнили область за пределами этого круга — проиграли.
 `);
 
 

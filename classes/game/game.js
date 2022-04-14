@@ -82,7 +82,7 @@ class Game {
 
 
   #applyListeners(){
-    this.canvas.addEventListener( "mousedown", this.#clickHandle.bind(this) );
+    this.canvas.addEventListener( "pointerdown", this.#clickHandle.bind(this) );
     this.canvas.addEventListener( "contextmenu", e => e.preventDefault() );
   }
 
@@ -102,7 +102,7 @@ class Game {
       this.#createTimer();
 
 
-    let whenUpMouse = new Promise(res => this.canvas.addEventListener("mouseup", res, {once: true}))
+    let whenUpMouse = new Promise(res => this.canvas.addEventListener("pointerup", res, {once: true}))
       .then(() => whenUpMouse.up = true);
 
     this.ctx.fillStyle = "black";
@@ -120,6 +120,7 @@ class Game {
       this.#score += 1 + ball.radius / 100;
     }
 
+    console.log(123);
     if ( ball.outsideOf( this.ball ) )
       return this.#endHandler(false);
 
