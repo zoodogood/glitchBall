@@ -96,7 +96,7 @@ class Game {
 
 
     let ball = this.userBall;
-    ball.setPosition( e.layerX, e.layerY );
+    ball.setPosition( e.offsetX, e.offsetY );
 
     if ( this.#timer === null )
       this.#createTimer();
@@ -120,7 +120,6 @@ class Game {
       this.#score += 1 + ball.radius / 100;
     }
 
-    console.log(123);
     if ( ball.outsideOf( this.ball ) )
       return this.#endHandler(false);
 
@@ -139,7 +138,8 @@ class Game {
 
   #endHandler(hasWin){
     this.over = true;
-    localStorage.setItem( "recordScore", this.getScore() );
+    if (localStorage.recordScore < this.getScore())
+      localStorage.setItem( "recordScore", this.getScore() );
 
     if ( typeof this.onEnd === "function" )
       this.onEnd(this, hasWin);
@@ -157,6 +157,7 @@ class Game {
 
   #createTimer(){
     this.#timer = 15.2;
+
     new Timeout((timer) => {
       if (this.over)
         return;

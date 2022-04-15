@@ -7,11 +7,5 @@
   border: 2px solid black;
   cursor: cell;
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  /* width with border / 2 */
-  margin-left: -202px;
-  margin-top: -202px;
+  flex-shrink: 0;
 }
