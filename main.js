@@ -5,7 +5,7 @@ new Game("canvas")
   .setTitleElement("#title")
   .setEndHandler(async (game, hasWin) => {
     game.ctx.clearRect(0, 0, 400, 400);
-    game.titleElement.innerHTML = `<span class = "increased-font">${ hasWin ? `<b>Счёт: ${ game.getScore() }</b><br>Время вышло.` : `<b>Счёт: ${ game.getScore() }</b><br>Игра окончена. Я без понятия почему Вы решили проиграть . . .`}</span>`;
+    game.titleElement.innerHTML = `<span class = "increased-font">${ hasWin ? `<b>Счёт: ${ game.getScore() }</b><br>Время вышло.` : `<b>Счёт: ${ game.getScore() }</b><br><small>Игра окончена. Я без понятия почему Вы решили проиграть . . .</small>`}</span>`;
     game.canvas.classList.add("restarted");
 
     await new Promise(res => game.canvas.addEventListener("pointerup", res, { once: true }));
@@ -15,6 +15,13 @@ new Game("canvas")
   })
   .init();
 
+if ( localStorage.getItem("recordScore") ){
+  const record = localStorage.getItem("recordScore");
+  console.info(`Ваш рекорд: ${ record }`);
+  globalThis.recordValue = record;
+}
+
+
 new HidingInfo("#getInfo",
   `<b>Привет! Правила игры:</b>
   1. Как только вы кликните посередине поля запустится таймер
@@ -22,8 +29,5 @@ new HidingInfo("#getInfo",
   3. Очки можно получить заполняя область среднего круга (того, который движется)
   Для заполнения <span>зажмите левую кнопку мыши</span> внутри него.
   4. Если Вы заполнили область за пределами этого круга — проиграли.
+  ${ globalThis.recordValue ? `R) Ваш Рекорд: ${ globalThis.recordValue }` : ""}
 `);
-
-
-if ( localStorage.getItem("recordScore") )
-  console.info(`Ваш рекорд: ${ localStorage.getItem("recordScore") }`);
