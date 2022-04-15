@@ -6,7 +6,7 @@ body
 
 #title
 {
-  padding-top: 50px;
+  padding-top: 5vw;
   flex-basis: 50vh;
 }
 
@@ -30,4 +30,13 @@ body
     {
       background-size: 40% 40%;
     }
+}
+
+
+@media (max-width: 680px){
+  #title
+  {
+    flex-basis: 70vh;
+    max-width: 80vw;
+  }
 }
