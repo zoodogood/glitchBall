@@ -138,8 +138,9 @@ class Game {
 
   #endHandler(hasWin){
     this.over = true;
+    
     if (+localStorage.recordScore < +this.getScore())
-      localStorage.setItem( "recordScore", this.getScore() );
+      globalThis.recordScore = localStorage.recordScore = this.getScore();
 
     if ( typeof this.onEnd === "function" )
       this.onEnd(this, hasWin);
