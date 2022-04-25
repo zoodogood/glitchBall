@@ -7,7 +7,9 @@ body
 #title
 {
   padding-top: 5vw;
-  flex-basis: 50vh;
+
+  position: fixed;
+  bottom: 4vh;
 }
 
 .restarted
@@ -16,6 +18,8 @@ body
   background-repeat: no-repeat;
   background-image: url("resources/repeat.png");
   animation: scaleBackground 200ms ease-in-out 0s 1 normal forwards;
+
+  position: fixed;
 }
 
 
