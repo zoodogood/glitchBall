@@ -1,7 +1,7 @@
 new CssIncluder( "classes/getInfoButton/info.css" ).include();
 
 class HidingInfo {
-  constructor(elementSelector, content){
+  constructor(elementSelector, content = ""){
     this.element = document.querySelector(elementSelector);
     this.content = content;
 
@@ -18,5 +18,10 @@ class HidingInfo {
 
     this.element.classList.remove("info-open");
     this.element.textContent = beforeContent;
+  }
+
+  setContent(content){
+    this.content = content;
+    return this;
   }
 }
