@@ -17,10 +17,10 @@ new Game("canvas")
   })
   .init();
 
-if ( localStorage.getItem("recordScore") ){
-  globalThis.recordValue = localStorage.getItem("recordScore");
-  console.info(`Ваш рекорд: ${ globalThis.recordValue }`);
-}
+
+globalThis.recordScore = +localStorage.getItem("recordScore") || 0;
+
+
 
 
 const takeHidingContent = () =>
@@ -30,7 +30,7 @@ const takeHidingContent = () =>
 3. Очки можно получить заполняя область среднего круга (того, который движется)
 Для заполнения <span>зажмите левую кнопку мыши</span> внутри него.
 4. Если Вы заполнили область за пределами этого круга — проиграли.
-${ globalThis.recordValue ? `R) Ваш Рекорд: ${ globalThis.recordValue }` : ""}`;
+${ globalThis.recordScore ? `R) Ваш Рекорд: ${ globalThis.recordScore }` : ""}`;
 
 globalThis.hiding = new HidingInfo("#getInfo")
 .setContent( takeHidingContent() );
