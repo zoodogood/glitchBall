@@ -112,7 +112,7 @@ class Game {
       await delay(10);
 
       if ( ball.outsideOf( this.ball ) )
-        this.ctx.fillStyle = "red";
+        this.ctx.fillStyle = "#ff0000";
 
       if ( ball.outsideOf( this.canvBall ) )
         return this.#endHandler(false);
@@ -139,6 +139,7 @@ class Game {
   #endHandler(hasWin){
     this.over = true;
 
+    console.log(this.getScore());
     if (globalThis.recordScore < this.getScore())
       globalThis.recordScore = localStorage.recordScore = this.getScore();
 
@@ -177,11 +178,11 @@ class Game {
 
 
   getScore(){
-    return this.#score.toFixed(0);
+    return Math.floor(this.#score);
   }
 
   getTime(){
-    return this.#timer.toFixed(1);
+    return this.#timer;
   }
 }
 
