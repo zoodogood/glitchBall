@@ -15,7 +15,7 @@ new Game("canvas")
     game.titleElement.innerHTML = `<span class = "increased-font">${ content }</span>`;
     game.canvas.classList.add("restarted");
 
-    await new Promise(res => game.canvas.addEventListener("pointerdown", res, { once: true }));
+    await new Promise(res => game.canvas.addEventListener("click", res, { once: true }));
     game.canvas.classList.remove("restarted");
     game.titleElement.textContent = "Пуск!";
     game.init();
@@ -35,7 +35,7 @@ const takeHidingContent = () =>
 3. Очки можно получить заполняя область среднего круга (того, который движется)
 Для заполнения <span>зажмите левую кнопку мыши</span> внутри него.
 4. Если Вы заполнили область за пределами этого круга — проиграли.
-${ globalThis.recordScore ? `R) Ваш Рекорд: ${ globalThis.recordScore }` : ""}`;
+${ globalThis.recordScore ? `R) Ваш Рекорд: ${ globalThis.recordScore }` : "" }`;
 
 globalThis.hiding = new HidingInfo("#getInfo")
 .setContent( takeHidingContent() );
