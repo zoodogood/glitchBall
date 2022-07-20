@@ -7,10 +7,15 @@ new Game("canvas")
     globalThis.hiding.setContent( takeHidingContent() );
 
     game.ctx.clearRect(0, 0, 400, 400);
-    game.titleElement.innerHTML = `<span class = "increased-font">${ hasWin ? `<b>Счёт: ${ game.getScore() }</b><br>Время вышло.` : `<b>Счёт: ${ game.getScore() }</b><br><small>Игра окончена. Я без понятия почему Вы решили проиграть . . .</small>`}</span>`;
+
+    const content =  hasWin ?
+      `<b>Счёт: ${ game.getScore() }</b><br>Время вышло.` :
+      `<b>Счёт: ${ game.getScore() }</b><br><small>Игра окончена. Я без понятия почему Вы решили проиграть . . .</small>`;
+
+    game.titleElement.innerHTML = `<span class = "increased-font">${ content }</span>`;
     game.canvas.classList.add("restarted");
 
-    await new Promise(res => game.canvas.addEventListener("pointerup", res, { once: true }));
+    await new Promise(res => game.canvas.addEventListener("pointerdown", res, { once: true }));
     game.canvas.classList.remove("restarted");
     game.titleElement.textContent = "Пуск!";
     game.init();
