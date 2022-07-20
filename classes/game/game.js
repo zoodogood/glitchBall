@@ -9,10 +9,10 @@ const
 
 
 if ( BALL_MIN_RADIUS > BALL_MAX_RADIUS )
-  throw new Error("Really?");
+  throw new Error("Really? Max radius less than min radius");
 
 if ( EDGE_DISTANCE + BALL_MAX_RADIUS > 200 )
-  throw new Error("the size of the middle circle indented should not exceed 200 (radius of canv Ball)");
+  throw new Error("the size of the middle circle indented should not exceed 200 (radius of canvas Ball)");
 
 
 class Game {
@@ -39,8 +39,13 @@ class Game {
   init(){
     requestAnimationFrame( this.#myFrame );
 
-    this.ball = new Ball({ radius: BALL_MAX_RADIUS, x: 200, y: 200  });
+    // moving ball
+    this.ball     = new Ball({ radius: BALL_MAX_RADIUS, x: 200, y: 200  });
+
+    // largest area, canvas
     this.canvBall = new Ball({ radius: 200, x: 200, y: 200 });
+
+    // display when the user's mouse is pressed down
     this.userBall = new Ball({ radius: 0 });
 
     this.#timer = null;
@@ -60,7 +65,7 @@ class Game {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, 400, 400);
 
-    let ms = Date.now();
+    const ms = Date.now();
 
     if ( PULSE_SPEED )
       this.ball.radius = ( 0.5 + Math.cos(ms / PULSE_SPEED) / 2 ) * (BALL_MAX_RADIUS - BALL_MIN_RADIUS) + BALL_MIN_RADIUS;
@@ -83,20 +88,20 @@ class Game {
 
   #applyListeners(){
     this.canvas.addEventListener( "pointerdown", this.#clickHandle.bind(this) );
-    this.canvas.addEventListener( "contextmenu", e => e.preventDefault() );
+    this.canvas.addEventListener( "contextmenu", contextMenu => contextMenu.preventDefault() );
   }
 
 
 
-  async #clickHandle(e){
-    e.preventDefault();
+  async #clickHandle(clickEvent){
+    clickEvent.preventDefault();
 
     if (this.over)
       return;
 
 
     let ball = this.userBall;
-    ball.setPosition( e.offsetX, e.offsetY );
+    ball.setPosition( clickEvent.offsetX, clickEvent.offsetY );
 
     if ( this.#timer === null )
       this.#createTimer();
@@ -139,7 +144,6 @@ class Game {
   #endHandler(hasWin){
     this.over = true;
 
-    console.log(this.getScore());
     if (globalThis.recordScore < this.getScore())
       globalThis.recordScore = localStorage.recordScore = this.getScore();
 
@@ -169,7 +173,12 @@ class Game {
         return;
       }
 
-      this.titleElement.innerHTML = `Счёт: <b>${ this.#score.toFixed(0) }</b><br>Осталось времени: ${ this.#timer.toFixed(1) }`;
+      const score = Math.floor( this.#score );
+      const time  = this.#timer ?
+        this.#timer.toFixed(1) :
+        0;
+
+      this.titleElement.innerHTML = `Счёт: <b>${ score }</b><br>Осталось времени: ${ time }`;
 
       this.#timer -= 0.1;
       timer.launch();
@@ -205,7 +214,7 @@ class Ball {
 
 
   outsideOf( ball ){
-    let distance = Math.sqrt( (ball.x - this.x) ** 2 + (ball.y - this.y) ** 2 );
+    const distance = Math.sqrt( (ball.x - this.x) ** 2 + (ball.y - this.y) ** 2 );
 
     return distance + this.radius > ball.radius;
   }
