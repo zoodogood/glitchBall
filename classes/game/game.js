@@ -119,6 +119,9 @@ class Game {
       if ( ball.outsideOf( this.ball ) )
         this.ctx.fillStyle = "#ff0000";
 
+      if ( !ball.outsideOf( this.ball ) )
+        this.ctx.fillStyle = "#000000";
+
       if ( ball.outsideOf( this.canvBall ) )
         return this.#endHandler(false);
 
